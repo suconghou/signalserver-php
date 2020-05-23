@@ -1,0 +1,47 @@
+## a turn server
+
+written in php , powered by swoole
+
+> can works with webrtc
+> can works with fastloadjs
+
+信令服务器
+
+TURN SERVER
+
+STUN SERVER
+
+SWOOLE SOCKET SERVER
+
+启动 -> 链接WS -> 发送本地OFFER/ICE
+
+在一个区域里广播,
+
+申请方 申请文件块ID
+
+发送方发送文件块,附上ID,数据,
+
+使用uuid链接.
+
+用户连接 -> 
+自己收到 init 
+{
+    id,
+    ids
+}
+告诉自己的ID和所有在线的ID
+
+使用sessionStorage 鉴别唯一客户端. 用户断线重连的情况
+
+自己应初始化,这些ID的链接,等待他们主动联系自己
+
+
+其他已在线人员收到有人上线消息
+{
+    online,
+    id: 上线人的ID
+}
+
+
+
+
