@@ -35,6 +35,20 @@ class app
 
     private function message(Swoole\Websocket\Server $server, $frame)
     {
+        $data = json_decode($frame->data,true);
+        $to = $data['to']??'';
+        if($to)
+        {
+            $fds = store::uids($to);
+            foreach($fds as $fd)
+            {
+                $this->server->push($fd, $frame->data);
+            }
+        }
+        else
+        {
+            util::log("can not broadcast");
+        }
         // $server->push($frame->fd, $frame->data);
         // $this->broadcast($frame->data);
     }

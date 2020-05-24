@@ -24,13 +24,27 @@ class store
         }
     }
 
-    public static function fds()
+    public static function fds():array
     {
         return array_keys(self::$infoMap);
     }
 
-    public static function ids()
+    public static function ids():array
     {
         return array_unique(array_values(self::$infoMap));
     }
+
+    public static function uids(string $uid):array
+    {
+        $fds=[];
+        foreach(self::$infoMap as $fd => $id)
+        {
+            if($id==$uid)
+            {
+                $fds[]=$fd;
+            }
+        }
+        return $fds;
+    }
+
 }
