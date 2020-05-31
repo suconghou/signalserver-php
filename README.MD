@@ -1,5 +1,12 @@
 ## a turn server
 
+
+dev in docker 
+
+```
+docker run --rm -it -p 9090:9092 -v "$PWD":/data suconghou/php:swoole sh  
+```
+
 written in php , powered by swoole
 
 > can works with webrtc
