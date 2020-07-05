@@ -60,3 +60,18 @@ works with fastloadjs
 
 
 
+`/etc/systemd/system/stunserver.service`
+```
+[Unit]
+Description=stunserver service
+After=network.target network-online.target
+
+[Service]
+Restart=on-failure
+TimeoutStartSec=0
+ExecStart=/usr/local/bin/stunserver
+
+[Install]
+WantedBy=multi-user.target
+
+```
