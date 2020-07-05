@@ -1,7 +1,7 @@
-## a turn server
+## 信令服务器
 
 
-dev in docker 
+**dev in docker** 
 
 ```
 docker run --rm -it -p 9090:9092 -v "$PWD":/data suconghou/php:swoole sh  
@@ -9,24 +9,13 @@ docker run --rm -it -p 9090:9092 -v "$PWD":/data suconghou/php:swoole sh
 
 written in php , powered by swoole
 
-> can works with webrtc
-> can works with fastloadjs
+works with fastloadjs
 
 信令服务器
-
-TURN SERVER
-
-STUN SERVER
-
-SWOOLE SOCKET SERVER
 
 启动 -> 链接WS -> 发送本地OFFER/ICE
 
 在一个区域里广播,
-
-申请方 申请文件块ID
-
-发送方发送文件块,附上ID,数据,
 
 使用uuid链接.
 
@@ -42,13 +31,11 @@ SWOOLE SOCKET SERVER
 
 自己应初始化,这些ID的链接,等待他们主动联系自己
 
-
 其他已在线人员收到有人上线消息
 {
     online,
     id: 上线人的ID
 }
-
 
 ## 消息类别
 

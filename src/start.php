@@ -4,7 +4,6 @@ require 'libs/util.php';
 require 'libs/store.php';
 require 'libs/route.php';
 require 'libs/request.php';
-require 'libs/service.php';
 
 class app
 {
@@ -49,8 +48,6 @@ class app
         {
             util::log("can not broadcast");
         }
-        // $server->push($frame->fd, $frame->data);
-        // $this->broadcast($frame->data);
     }
 
     private function close(Swoole\Websocket\Server $server, $fd)
@@ -107,10 +104,6 @@ class app
         $this->server->start();
     }
 
-    private function parse()
-    {
-    }
-
     private function json(int $fd, array $data)
     {
         return $this->server->push($fd, json_encode($data, (JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)));
@@ -127,6 +120,6 @@ class app
 
 
 $host = '0.0.0.0';
-$port = 9092;
+$port = getenv('PORT')?:9092;
 
 (new app($host, $port))->run();
