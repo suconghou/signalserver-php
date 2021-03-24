@@ -34,18 +34,14 @@ class app
 
     private function message(Swoole\Websocket\Server $server, $frame)
     {
-        $data = json_decode($frame->data,true);
-        $to = $data['to']??'';
-        if($to)
-        {
+        $data = json_decode($frame->data, true);
+        $to = $data['to'] ?? '';
+        if ($to) {
             $fds = store::uids($to);
-            foreach($fds as $fd)
-            {
+            foreach ($fds as $fd) {
                 $this->server->push($fd, $frame->data);
             }
-        }
-        else
-        {
+        } else {
             util::log("can not broadcast");
         }
     }
@@ -120,6 +116,6 @@ class app
 
 
 $host = '0.0.0.0';
-$port = getenv('PORT')?:9092;
+$port = getenv('PORT') ?: 9092;
 
 (new app($host, $port))->run();

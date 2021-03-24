@@ -46,12 +46,12 @@ class route
 
 	public static function add(string $regex, Closure $fn, array $methods)
 	{
-		self::$routes[] = 
-		[
-			$regex,
-			$fn,
-			$methods,
-		];
+		self::$routes[] =
+			[
+				$regex,
+				$fn,
+				$methods,
+			];
 	}
 
 
@@ -63,19 +63,16 @@ class route
 
 	public static function run(Swoole\Websocket\Server $server, $request, $response)
 	{
-		list('request_uri' => $uri,'request_method' => $m) = $request->server;
+		list('request_uri' => $uri, 'request_method' => $m) = $request->server;
 		$uri = '/' . implode('/', array_values(array_filter(explode('/', $uri, 9), 'strlen')));
 		$ret = self::match($uri, $m);
-		if ($ret)
-		{
-			list($url,$params,$fn) = $ret;
+		if ($ret) {
+			list($url, $params, $fn) = $ret;
 			return self::call($fn, [$server, $request, $response], $url, $params);
 		}
 
-		if (!self::$notfound)
-		{
-			self::$notfound = function(Swoole\Websocket\Server $server,$request,$response)
-			{
+		if (!self::$notfound) {
+			self::$notfound = function (Swoole\Websocket\Server $server, $request, $response) {
 				$response->status(404);
 				$response->end('Not Found');
 			};
@@ -86,10 +83,8 @@ class route
 
 	private static function match(string $uri, string $m)
 	{
-		foreach (self::$routes as $i => list($regex,$fn,$methods))
-		{
-			if (in_array($m, $methods, true) && preg_match("/^{$regex}$/", $uri, $matches))
-			{
+		foreach (self::$routes as $i => list($regex, $fn, $methods)) {
+			if (in_array($m, $methods, true) && preg_match("/^{$regex}$/", $uri, $matches)) {
 				$url = array_shift($matches);
 				return [
 					$url,

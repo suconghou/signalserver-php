@@ -15,11 +15,10 @@ class util
         echo PHP_EOL, $e, PHP_EOL;
     }
 
-	public static function jsonPut($response, array $data)
-	{
-		$data = json_encode($data, (JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-		$response->header('Content-Type', 'application/json', false);
-		return $response->end($data);
-	}
-
+    public static function jsonPut($response, array $data)
+    {
+        $data = json_encode($data, (JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        $response->header('Content-Type', 'application/json', false);
+        return $response->end($data);
+    }
 }

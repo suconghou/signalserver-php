@@ -23,6 +23,6 @@ foreach ($files as $file) {
     file_put_contents('target.php', $txt, FILE_APPEND);
 }
 
-file_put_contents('stunserver', '#!/usr/bin/env php' . PHP_EOL . php_strip_whitespace(('target.php')));
+file_put_contents('signalserver', '#!/usr/bin/env php' . PHP_EOL . php_strip_whitespace(('target.php')));
 
 unlink("target.php");
