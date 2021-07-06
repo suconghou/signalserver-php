@@ -34,7 +34,7 @@ class app
 
     private function message(Swoole\Websocket\Server $server, $frame)
     {
-        $data = json_decode($frame->data, true);
+        $data = json_decode($frame->data, true, 32, JSON_THROW_ON_ERROR);
         $to = $data['to'] ?? '';
         if ($to) {
             $fds = store::uids($to);
@@ -62,28 +62,28 @@ class app
         $this->server->on('open', function (Swoole\Websocket\Server $server, $req) {
             try {
                 $this->open($server, $req);
-            } catch (Exception | Error $e) {
+            } catch (Throwable $e) {
                 util::errLog($e);
             }
         });
         $this->server->on('message', function (Swoole\Websocket\Server $server, $frame) {
             try {
                 $this->message($server, $frame);
-            } catch (Exception | Error $e) {
+            } catch (Throwable $e) {
                 util::errLog($e);
             }
         });
         $this->server->on('close', function (Swoole\Websocket\Server $server, $fd) {
             try {
                 $this->close($server, $fd);
-            } catch (Exception | Error $e) {
+            } catch (Throwable $e) {
                 util::errLog($e);
             }
         });
         $this->server->on('request', function ($request, $response) {
             try {
                 $this->request($this->server, $request, $response);
-            } catch (Exception | Error $e) {
+            } catch (Throwable $e) {
                 util::errLog($e);
             }
         });
@@ -93,7 +93,7 @@ class app
             try {
                 request::regist();
                 echo "Swoole server is started at {$server->host}:{$server->port}\n";
-            } catch (Exception | Error $e) {
+            } catch (Throwable $e) {
                 util::errLog($e);
             }
         });

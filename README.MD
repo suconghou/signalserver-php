@@ -13,6 +13,7 @@ docker run --rm -it -p 9090:9092 -v "$PWD":/data suconghou/php:swoole sh
 similar project
 
 - https://github.com/suconghou/signalserver
+- https://github.com/suconghou/signalserver-nim
 
 ### systemd service
 
